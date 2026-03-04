@@ -22,6 +22,10 @@ public class Typewriter {
     }
 
     public static void wait(int ms) {
-        try { Thread.sleep(ms); } catch (InterruptedException e) {}
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 }
