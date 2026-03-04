@@ -1,4 +1,4 @@
-package com.example.demo;
+package uk.co.gnosis.smokingun;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

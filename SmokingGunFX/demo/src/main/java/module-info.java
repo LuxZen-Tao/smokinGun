@@ -6,6 +6,6 @@ module com.example.demo {
     requires org.kordamp.ikonli.javafx;
     requires com.almasb.fxgl.all;
 
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
+    opens uk.co.gnosis.smokingun to javafx.fxml;
+    exports uk.co.gnosis.smokingun;
 }
