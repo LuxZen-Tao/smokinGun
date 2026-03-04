@@ -4,16 +4,16 @@ import java.util.Scanner;
 
 class RangeController {
     private Gun playerWeapon;
-    private Magazine spareMag = new Magazine(0);
+    private Magazine spareMag = new Magazine(0); // Standard spare mag size for most handguns
     private final Scanner scanner = new Scanner(System.in);
-    private Typewriter type = new Typewriter();
+    private Typewriter type= new Typewriter();
 
     public RangeController() {
         // You could easily change this to: playerWeapon = new DesertEagle();
 
     }
 
-    public Gun chooseWeapon(Scanner sc) {
+    public Gun ChooseWeapon(Scanner sc) {
         int choice = 0;
         while (choice < 1 || choice > 6) {
             System.out.println("Choose your weapon:");
@@ -69,13 +69,20 @@ class RangeController {
         System.out.println("--- SYSTEM BOOT ---");
 
         for (String msg : bootMessages) {
-            System.out.print(msg);
-            for (int i = 0; i < 3; i++) {
-                Typewriter.wait(250);
-                System.out.print(".");
+            try {
+                // Print the message one by one
+                System.out.print(msg);
+
+                // "Loading" animation frames
+                for (int i = 0; i < 3; i++) {
+                    Thread.sleep(400); // Wait 0.4 seconds
+                    System.out.print(".");
+                }
+
+                System.out.println(" [OK]");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
-            Typewriter.wait(120);
-            System.out.println(" [OK]");
         }
         System.out.println("-------------------\n");
     }
@@ -95,22 +102,21 @@ class RangeController {
                 
                 """;
         System.out.println(gameGreats);
-        LoadingBar.runIntroAnimation();
+        LoadingBar.display();
 
         Typewriter.wait(1000);
 
         welcomeSpeech();
 
         type.write("First, choose your weapon!", 40);
-        chooseWeapon(scanner);
-        spareMag = new Magazine(playerWeapon.magSize);
+        ChooseWeapon(scanner);
 
         boolean isRunning = true;
         while (isRunning) {
             Typewriter.write("\n--- FIRING RANGE MENU ---", 30);
             System.out.println("Gun: " + playerWeapon.name + " (" + playerWeapon.caliber + ")");
             System.out.println("Ammo in Gun: " + (playerWeapon.loaded != null ? playerWeapon.loaded.getCount() : "N/A"));
-            System.out.println("Ammo in spare pouch mag: " + spareMag.getCount() + "/" + playerWeapon.magSize);
+            System.out.println("Ammo in spare pouch mag: " + spareMag.getCount() + "/12");
 
             System.out.println("1. Fill Pouch Magazine");
             System.out.println("2. Load Pouch Mag into Gun");
