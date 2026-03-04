@@ -88,43 +88,43 @@ class RangeController {
     }
 
     public void startSession() {
+        bootSequence();
+        String gameGreats = """
+                .----------------.  .----------------.  .----------------.  .----------------. 
+                | .--------------. || .--------------. || .--------------. || .--------------. |
+                | |   _____      | || |     ____     | || |     ____     | || |     ____     | |
+                | |  |_   _|     | || |   .'    `.   | || |   .'    `.   | || |   .'    `.   | |
+                | |    | |       | || |  /  .--.  \\  | || |  /  .--.  \\  | || |  /  .--.  \\  | |
+                | |    | |   _   | || |  | |    `|  | || |  |  `--'  /  | || |  |  `--'  /  | |
+                | |   _| |_ ( )_ | || |  \\  `--'  /  | || |   `.___.'`   | || |   `.___.'`   | |
+                |_|  |_(_)|____||_||_|   `.____.'   |_| \\\\`._____.'\\__|_||_|   `.____.'   |_| 
+                '----------------' '----------------' '----------------' '----------------' 
+                
+                """;
+        System.out.println(gameGreats);
+        LoadingBar.display();
+
+        Typewriter.wait(1000);
+
+        welcomeSpeech();
+
+        type.write("First, choose your weapon!", 40);
+        ChooseWeapon(scanner);
+
         boolean isRunning = true;
         while (isRunning) {
-            bootSequence();
-            String gameGreats = """
-                    .----------------.  .----------------.  .----------------.  .----------------. 
-                    | .--------------. || .--------------. || .--------------. || .--------------. |
-                    | |   _____      | || |     ____     | || |     ____     | || |     ____     | |
-                    | |  |_   _|     | || |   .'    `.   | || |   .'    `.   | || |   .'    `.   | |
-                    | |    | |       | || |  /  .--.  \\  | || |  /  .--.  \\  | || |  /  .--.  \\  | |
-                    | |    | |   _   | || |  | |    `|  | || |  |  `--'  /  | || |  |  `--'  /  | |
-                    | |   _| |_ ( )_ | || |  \\  `--'  /  | || |   `.___.'`   | || |   `.___.'`   | |
-                    |_|  |_(_)|____||_||_|   `.____.'   |_| \\\\`._____.'\\__|_||_|   `.____.'   |_| 
-                    '----------------' '----------------' '----------------' '----------------' 
-                    
-                    """;
-            LoadingBar.display();
-
-            Typewriter.wait(1000);
-
-            welcomeSpeech();
-
-            type.write("First, choose your weapon3!", 40);
-            ChooseWeapon(scanner);
-            Typewriter.write("\n--- FIRING RANGE MENU ---");
+            Typewriter.write("\n--- FIRING RANGE MENU ---", 30);
             System.out.println("Gun: " + playerWeapon.name + " (" + playerWeapon.caliber + ")");
             System.out.println("Ammo in Gun: " + (playerWeapon.loaded != null ? playerWeapon.loaded.getCount() : "N/A"));
             System.out.println("Ammo in spare pouch mag: " + spareMag.getCount() + "/12");
 
-            System.out.println("\r4. Fill Pouch Magazine");
+            System.out.println("1. Fill Pouch Magazine");
             System.out.println("2. Load Pouch Mag into Gun");
             System.out.println("3. Fire Single Shot");
             System.out.println("4. Rapid Fire (Mag Dump)");
             System.out.println("5. Clear Jam");
             System.out.println("6. Eject Magazine");
             System.out.println("0. Leave Range");
-            System.out.print("Selection: ");
-
             System.out.print("Selection: ");
             String input = scanner.nextLine();
 
